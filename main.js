@@ -1,4 +1,4 @@
-let images = [
+const images = [
   "./assets/bell.png",
   "./assets/book.png",
   "./assets/cobweb.png",
@@ -9,13 +9,19 @@ let images = [
   "./assets/lama.png",
   "./assets/sun.png",
   "./assets/yinyang.png",
+  "./assets/threeway.png",
+  "./assets/light.png",
+  "./assets/investment.png",
+  "./assets/digital-asset.png",
+  "./assets/asset.png"
 ];
-let ran = false;
+
 const rightside = document.getElementById("rightside");
 const guessImageContainer = document.getElementById("guessImage");
 let guessImage = images[Math.floor(Math.random() * images.length)];
 
-// Initialize row outside the loop
+let ran = false;
+
 let row = document.createElement("div");
 row.classList.add("row");
 rightside.appendChild(row);
@@ -28,24 +34,15 @@ for (let i = 0; i < 99; i++) {
     rightside.appendChild(row);
   }
 
-  // Create div for each image and number
   let div = document.createElement("div");
   div.classList.add("graphElement");
   row.appendChild(div);
-  if (i % 9 == 0) {
-    let img = document.createElement("img");
-    img.setAttribute("src", guessImage);
-    img.classList.add("image");
-    div.appendChild(img);
-  } else {
-    // Create and append image element
-    let img = document.createElement("img");
-    img.setAttribute("src", images[Math.floor(Math.random() * images.length)]);
-    img.classList.add("image");
-    div.appendChild(img);
-  }
+  
+  let img = document.createElement("img");
+  img.setAttribute("src", i % 9 == 0 ? guessImage : images[Math.floor(Math.random() * images.length)]);
+  img.classList.add("image");
+  div.appendChild(img);
 
-  // Create and append paragraph element for number
   let num = document.createElement("p");
   num.innerText = i;
   num.classList.add("num");
@@ -57,20 +54,19 @@ document.getElementById("ball").addEventListener("click", onClick);
 function onClick(e) {
   if (!ran && e.target.id === "ball") {
     guessImageContainer.setAttribute("src", guessImage);
-
     guessImageContainer.classList.add("fade-in");
     document.getElementById("rightside").classList.add("fade-out");
-    document.getElementById("ball").classList.add("fade-out");
 
     let button = document.createElement("button");
     button.innerHTML = "Try again?";
     button.classList.add("tryAgainButton");
+    button.addEventListener("click", tryagain);
     document.getElementById("leftside").appendChild(button);
-    button.setAttribute("onclick", "tryagain()");
 
     ran = true;
   }
 }
+
 function tryagain() {
   location.reload();
 }
