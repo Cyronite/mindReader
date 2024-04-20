@@ -2,20 +2,20 @@ const images = [
   "./assets/bell.png",
   "./assets/book.png",
   "./assets/cobweb.png",
-  "./assets/cross.png",
   "./assets/flower.png",
-  "./assets/hinduist.png",
-  "./assets/islam.png",
   "./assets/lama.png",
   "./assets/sun.png",
-  "./assets/yinyang.png",
   "./assets/threeway.png",
+  "./assets/add.png",
+  "./assets/star.png",
   "./assets/light.png",
   "./assets/investment.png",
   "./assets/digital-asset.png",
+  "./assets/mobile-notch.png",
   "./assets/asset.png"
 ];
 
+const clickSound = new Audio("./assets/metal-whoosh.mp3");
 const rightside = document.getElementById("rightside");
 const guessImageContainer = document.getElementById("guessImage");
 let guessImage = images[Math.floor(Math.random() * images.length)];
@@ -53,6 +53,7 @@ document.getElementById("ball").addEventListener("click", onClick);
 
 function onClick(e) {
   if (!ran && e.target.id === "ball") {
+    clickSound.play();
     guessImageContainer.setAttribute("src", guessImage);
     guessImageContainer.classList.add("fade-in");
     document.getElementById("rightside").classList.add("fade-out");
